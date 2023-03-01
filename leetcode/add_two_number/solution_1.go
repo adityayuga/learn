@@ -58,24 +58,26 @@ func addTwoNumbers(l1 *ListNode, l2 *ListNode) *ListNode {
         }      
     }
 
+    // handling overflow
+    if isOverflow {
+        resultArr = append(resultArr, 1)
+    }
+
     // create the result
     var (
         result *ListNode
     )
-    for _, val := range resultArr {
-        fmt.Println(val)
+    for i := len(resultArr)-1; i>=0; i-- {
         tempNode := &ListNode{
-            Val: val,
-            Next: nil,
-        }
-
-        if result != nil {
-            result.Next = tempNode
+            Val: resultArr[i],
+            Next: result,
         }
         
-        result = tempNode
         fmt.Println(result)
+        result = tempNode
     }
+
+    fmt.Println(result)
 
     return result
 }
