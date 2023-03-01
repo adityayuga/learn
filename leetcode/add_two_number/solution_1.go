@@ -13,8 +13,21 @@ func addTwoNumbers(l1 *ListNode, l2 *ListNode) *ListNode {
     tempNode2 := l2
 
     for {
+        var (
+            tempVal1 int
+            tempVal2 int
+        )
+
+        if tempNode1 != nil {
+           tempVal1 = tempNode1.Val
+        }
+
+        if tempNode2 != nil {
+           tempVal2 = tempNode2.Val
+        }
+
         // multiply the value
-        tempAdd := tempNode1.Val + tempNode2.Val
+        tempAdd := tempVal1 + tempVal2
         if isOverflow {
              tempAdd += 1
         }
@@ -31,13 +44,18 @@ func addTwoNumbers(l1 *ListNode, l2 *ListNode) *ListNode {
         }
 
         // if no more next value
-        if tempNode1.Next == nil || tempNode2.Next == nil {
+        if tempNode1.Next == nil && tempNode2.Next == nil {
             break;
         }
-        
+
         // assign the next to temp val
-        tempNode1 = tempNode1.Next
-        tempNode2 = tempNode2.Next        
+        if tempNode1.Next != nil {
+            tempNode1 = tempNode1.Next
+        }
+        
+        if tempNode2.Next != nil {
+            tempNode2 = tempNode2.Next
+        }      
     }
 
     // create the result
@@ -45,6 +63,7 @@ func addTwoNumbers(l1 *ListNode, l2 *ListNode) *ListNode {
         result *ListNode
     )
     for _, val := range resultArr {
+        fmt.Println(val)
         tempNode := &ListNode{
             Val: val,
             Next: nil,
@@ -55,6 +74,7 @@ func addTwoNumbers(l1 *ListNode, l2 *ListNode) *ListNode {
         }
         
         result = tempNode
+        fmt.Println(result)
     }
 
     return result
